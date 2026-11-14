@@ -1251,7 +1251,7 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 .profile-heading.about-title-lockup .profile-identity > span {
   display: inline-block;
   position: relative;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: inherit;
   font-size: clamp(21px, 3.4vw, 50px);
   font-style: normal;
   font-weight: 400;
