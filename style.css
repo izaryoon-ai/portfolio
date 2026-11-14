@@ -1215,7 +1215,8 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 }
 
 /* Crop the thin outer seam of the embedded showreel. */
-:is(#about-portfolio-film, .portfolio-film-page) .resume-film-stage > .vimeo-film-player {
+:is(#about-portfolio-film, .portfolio-film-page) .resume-film-stage > .vimeo-film-player,
+.resume-film-stage > .vimeo-film-player--edge-crop {
   position: absolute;
   inset: -2px;
   width: calc(100% + 4px);
