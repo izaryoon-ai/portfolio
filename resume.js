@@ -1,10 +1,53 @@
 // Shared cover -> black -> playback, and black -> cover on completion.
 (() => {
+
+// Keep the existing player mounted so rotation does not restart playback.
+function enableLandscapePlayback(stage) {
+  const landscape = matchMedia('(orientation: landscape) and (pointer: coarse) and (max-height: 600px)');
+  const shell = stage.closest('.resume-showreel');
+  let playing = false;
+  let nativeFullscreen = false;
+
+  function update() {
+    const expanded = landscape.matches && !stage.hidden && !nativeFullscreen &&
+      !document.fullscreenElement && (playing || shell.classList.contains('landscape-playback'));
+    shell.classList.toggle('landscape-playback', expanded);
+  }
+  landscape.addEventListener('change', update);
+  document.addEventListener('fullscreenchange', update);
+  return {
+    play() { playing = true; update(); },
+    pause() { playing = false; update(); },
+    stop() { playing = false; shell.classList.remove('landscape-playback'); },
+    fullscreen(active) { nativeFullscreen = active; update(); }
+  };
+}
+
+let youtubeAPI;
+function loadYouTubeAPI() {
+  if (window.YT?.Player) return Promise.resolve(window.YT);
+  if (!youtubeAPI) {
+    youtubeAPI = new Promise((resolve, reject) => {
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        resolve(window.YT);
+        previous?.();
+      };
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.addEventListener('error', reject, {once: true});
+      document.head.append(script);
+    });
+  }
+  return youtubeAPI;
+}
+
   document.querySelectorAll('.resume-showreel').forEach(shell => {
     const cover = shell.querySelector('.resume-film-cover');
     const stage = shell.querySelector('.resume-film-stage');
     const player = stage?.querySelector('video');
     if (!cover || !stage) return;
+    const landscape = enableLandscapePlayback(stage);
     const frame = stage.querySelector('iframe');
     if (frame?.dataset.vimeoSrc) {
       const dimsPage = Boolean(shell.closest('#about-portfolio-film, .portfolio-film-page, .wake-production, .argent-production'));
@@ -18,11 +61,14 @@
         if (!window.Vimeo?.Player) return;
         vimeo = new window.Vimeo.Player(frame);
         vimeo.on('playing', () => {
+          landscape.play();
           if (dimsPage) shell.classList.add('about-film-playing');
         });
-        vimeo.on('pause', clearDimming);
-        vimeo.on('error', clearDimming);
+        vimeo.on('pause', () => { clearDimming(); landscape.pause(); });
+        vimeo.on('fullscreenchange', ({ fullscreen }) => landscape.fullscreen(fullscreen));
+        vimeo.on('error', () => { clearDimming(); landscape.stop(); });
         vimeo.on('ended', () => {
+          landscape.stop();
           clearDimming();
           stage.hidden = true;
           cover.hidden = false;
@@ -50,7 +96,26 @@
         cover.hidden = true;
         stage.hidden = false;
         stage.getBoundingClientRect();
-        frame.src = frame.dataset.src;
+        const source = new URL(frame.dataset.src, location.href);
+        const isYouTube = /(^|\.)youtube(?:-nocookie)?\.com$/.test(source.hostname);
+        if (isYouTube) {
+          source.searchParams.set('enablejsapi', '1');
+          source.searchParams.set('playsinline', '1');
+          if (location.origin !== 'null') source.searchParams.set('origin', location.origin);
+        }
+        frame.src = source.href;
+        if (isYouTube) {
+          loadYouTubeAPI().then(YT => {
+            new YT.Player(frame, {events: {
+              onStateChange: ({data}) => {
+                if (data === YT.PlayerState.PLAYING) landscape.play();
+                if (data === YT.PlayerState.PAUSED) landscape.pause();
+                if (data === YT.PlayerState.ENDED) landscape.stop();
+              },
+              onError: () => landscape.stop()
+            }});
+          }).catch(() => {});
+        }
         let revealed = false;
         const reveal = () => {
           if (revealed) return;
@@ -64,6 +129,13 @@
       return;
     }
     if (!player) return;
+    player.addEventListener('playing', landscape.play);
+    player.addEventListener('pause', landscape.pause);
+    for (const event of ['ended', 'error', 'emptied']) {
+      player.addEventListener(event, landscape.stop);
+    }
+    player.addEventListener('webkitbeginfullscreen', () => landscape.fullscreen(true));
+    player.addEventListener('webkitendfullscreen', () => landscape.fullscreen(false));
     if (shell.closest('#about-portfolio-film, .wake-production')) {
       const brightenPage = () => shell.classList.remove('about-film-playing');
       player.addEventListener('playing', () => {

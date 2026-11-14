@@ -1261,3 +1261,35 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 }
 
 .about-title-lockup .profile-identity strong { margin-inline-start: .35em; font-weight: 650; }
+
+/* Keep an inline placeholder while the same player fills the mobile viewport. */
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 600px) {
+  .resume-showreel.landscape-playback::before {
+    content: "";
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  html:has(.landscape-playback) { overflow: hidden; }
+  .resume-showreel.landscape-playback {
+    position: relative;
+    z-index: 100 !important;
+  }
+  .resume-showreel.landscape-playback > .resume-film-stage:not([hidden]) {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    aspect-ratio: auto;
+    background: #000;
+    opacity: 1;
+    transition: none;
+  }
+  .landscape-playback > .resume-film-stage > .vimeo-film-player {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
