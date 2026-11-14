@@ -1252,10 +1252,12 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
   display: inline-block;
   position: relative;
   font-family: inherit;
-  font-size: clamp(21px, 3.4vw, 50px);
+  font-size: clamp(15px, 1.65vw, 23px);
   font-style: normal;
   font-weight: 400;
   letter-spacing: -.045em;
   line-height: 1.15;
   color: inherit;
 }
+
+.about-title-lockup .profile-identity strong { margin-inline-start: .35em; font-weight: 650; }
