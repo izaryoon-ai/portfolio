@@ -1226,20 +1226,32 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 :is(.wake-production, .argent-production) .resume-showreel.about-film-playing { position: relative; z-index: 31; }
 
 /* ABOUT title lockup */
-.profile-heading.about-title-lockup { text-align: center; }
-.about-title-lockup > :is(h1,h2) { font-weight: 850; }
+.profile-heading.about-title-lockup {
+  text-align: center;
+  color: #0b0b0b;
+}
+.profile-heading.about-title-lockup > :is(h1,h2) {
+  margin: .08em 0 0;
+  font-size: clamp(50px, 9vw, 112px);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.065em;
+  color: inherit;
+}
 .profile-heading.about-title-lockup .profile-identity {
   display: block;
-  margin-top: clamp(12px, 2vw, 24px);
-  border-top: 1px solid var(--line);
-  padding: clamp(8px, 1.4vw, 18px) 0 0;
+  margin: 0;
+  border-bottom: 1px solid currentColor;
 }
 .profile-heading.about-title-lockup .profile-identity > span {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(21px, 4vw, 58px);
+  display: inline-block;
+  position: relative;
+  top: .07em;
+  font-family: "Bodoni Moda", Didot, "Bodoni MT", "Times New Roman", serif;
+  font-size: clamp(25px, 5.7vw, 90px);
   font-style: italic;
   font-weight: 400;
-  letter-spacing: -.035em;
-  line-height: 1.13;
-  color: var(--ink);
+  letter-spacing: -.045em;
+  line-height: .94;
+  color: inherit;
 }
