@@ -1226,8 +1226,11 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 :is(.wake-production, .argent-production) .resume-showreel.about-film-playing { position: relative; z-index: 31; }
 
 /* ABOUT title lockup */
+.home .profile-heading.about-title-lockup {
+  margin-inline: calc((100% - 90vw) / 2);
+}
 .profile-heading.about-title-lockup {
-  text-align: center;
+  text-align: left;
   color: #0b0b0b;
 }
 .profile-heading.about-title-lockup > :is(h1,h2) {
