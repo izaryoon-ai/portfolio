@@ -1241,17 +1241,18 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 .profile-heading.about-title-lockup .profile-identity {
   display: block;
   margin: 0;
-  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  margin-top: clamp(12px, 2vw, 24px);
+  padding-top: clamp(8px, 1.4vw, 16px);
 }
 .profile-heading.about-title-lockup .profile-identity > span {
   display: inline-block;
   position: relative;
-  top: .07em;
-  font-family: "Bodoni Moda", Didot, "Bodoni MT", "Times New Roman", serif;
-  font-size: clamp(25px, 5.7vw, 90px);
-  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 3.4vw, 50px);
+  font-style: normal;
   font-weight: 400;
   letter-spacing: -.045em;
-  line-height: .94;
+  line-height: 1.15;
   color: inherit;
 }
