@@ -1224,3 +1224,22 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 }
 
 :is(.wake-production, .argent-production) .resume-showreel.about-film-playing { position: relative; z-index: 31; }
+
+/* ABOUT title lockup */
+.profile-heading.about-title-lockup { text-align: center; }
+.about-title-lockup > :is(h1,h2) { font-weight: 850; }
+.profile-heading.about-title-lockup .profile-identity {
+  display: block;
+  margin-top: clamp(12px, 2vw, 24px);
+  border-top: 1px solid var(--line);
+  padding: clamp(8px, 1.4vw, 18px) 0 0;
+}
+.profile-heading.about-title-lockup .profile-identity > span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 4vw, 58px);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.13;
+  color: var(--ink);
+}
