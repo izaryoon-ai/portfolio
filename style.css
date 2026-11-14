@@ -1293,3 +1293,6 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
     height: 100%;
   }
 }
+
+.mabi-structured .mabi-media-pair.mabi-video-only { grid-template-columns: minmax(0, 1fr); }
+.mabi-structured .mabi-video-only > .mabi-media-column { padding: 0; }
