@@ -1296,3 +1296,8 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 
 .mabi-structured .mabi-media-pair.mabi-video-only { grid-template-columns: minmax(0, 1fr); }
 .mabi-structured .mabi-video-only > .mabi-media-column { padding: 0; }
+
+/* Tone down the full-screen WORK covers without affecting their text. */
+.project-full-cover .project-intro-frame > img {
+  filter: brightness(.84) saturate(.82);
+}
