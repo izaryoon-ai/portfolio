@@ -306,6 +306,8 @@
 .open-process li{counter-increment:open-step}.open-process li:before{content:'0' counter(open-step);display:block;font-size:10px;color:var(--muted);margin-bottom:10px}
 .open-process strong{display:block;font-size:14px;font-weight:650;margin-bottom:8px}.open-process p{font-size:13px;margin:0}
 .facial-process{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 35px;margin-top:28px}
+.facial-process > li:only-child { grid-column: 1 / -1; }
+.facial-process > li:only-child p + p { margin-top: .35em; }
 .case-evidence-link{display:inline-block;font-size:11px;letter-spacing:.02em;color:var(--ink);margin-top:3px}
 .project-case-study .production-figure{margin:32px 0 0}.project-case-study .production-figure figcaption{font-size:9px}
 .wake-production .facial-result-content .pipeline-result{background:var(--cloud-dancer);color:#242622;margin:0 0 32px;padding:14px 22px 12px;scroll-margin-top:90px}
