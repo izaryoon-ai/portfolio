@@ -872,6 +872,7 @@ html{scroll-behavior:smooth}
 .wake-applications-row .wake-application-copy,.wake-applications-row .wake-rnd-media-pair{grid-column:1/-1}
 .wake-rnd-media-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;min-width:0}
 .wake-rnd-media-pair .resume-showreel{margin:0}
+.wake-rnd-media-pair + .facial-asset-credits { margin-top: clamp(28px, 4vw, 56px); }
 .wake-rnd-media-pair .unified-film-cover .project-film-title{font-size:clamp(22px,3vw,42px)}
 @media(max-width:800px){.wake-rnd-media-pair{grid-template-columns:1fr;gap:25px}}
 
