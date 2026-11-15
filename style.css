@@ -308,6 +308,12 @@
 .facial-process{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 35px;margin-top:28px}
 .facial-process > li:only-child { grid-column: 1 / -1; }
 .facial-process > li:only-child p + p { margin-top: .35em; }
+.facial-pipeline-track h4.story-lead { margin: 0 0 8px; }
+.facial-pipeline-track + .facial-pipeline-track {
+  border-top: 1px solid var(--line);
+  margin-top: clamp(24px, 3.5vw, 44px);
+  padding-top: clamp(20px, 3vw, 36px);
+}
 .case-evidence-link{display:inline-block;font-size:11px;letter-spacing:.02em;color:var(--ink);margin-top:3px}
 .project-case-study .production-figure{margin:32px 0 0}.project-case-study .production-figure figcaption{font-size:9px}
 .wake-production .facial-result-content .pipeline-result{background:var(--cloud-dancer);color:#242622;margin:0 0 32px;padding:14px 22px 12px;scroll-margin-top:90px}
