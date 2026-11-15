@@ -1302,3 +1302,20 @@ body:is(.portfolio-film-page, :has(#about-portfolio-film, .wake-production, .arg
 .project-full-cover .project-intro-frame > img {
   filter: brightness(.84) saturate(.82);
 }
+
+.detail-footer {
+  align-items: center;
+}
+
+.detail-footer .footer-home {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  font: 900 clamp(2.875rem, 5vw, 3.625rem)/1 system-ui, sans-serif;
+}
+
+.detail-footer .footer-home:hover {
+  opacity: .65;
+}
