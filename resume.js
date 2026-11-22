@@ -56,10 +56,18 @@ function loadYouTubeAPI() {
       cover.addEventListener('click', () => {
         cover.hidden = true;
         stage.hidden = false;
-        frame.src = frame.dataset.vimeoSrc;
+        const source = new URL(frame.dataset.vimeoSrc);
+        source.searchParams.set('muted', '0');
+        source.searchParams.set('playsinline', '1');
+        frame.src = source.href;
         frame.focus({preventScroll: true});
         if (!window.Vimeo?.Player) return;
         vimeo = new window.Vimeo.Player(frame);
+        const activePlayer = vimeo;
+        activePlayer.setMuted(false).catch(() => {});
+        activePlayer.getVolume().then(volume => {
+          if (volume === 0) return activePlayer.setVolume(1);
+        }).catch(() => {});
         vimeo.on('playing', () => {
           landscape.play();
           if (dimsPage) shell.classList.add('about-film-playing');
@@ -107,6 +115,7 @@ function loadYouTubeAPI() {
         if (isYouTube) {
           loadYouTubeAPI().then(YT => {
             new YT.Player(frame, {events: {
+              onReady: ({target}) => target.unMute(),
               onStateChange: ({data}) => {
                 if (data === YT.PlayerState.PLAYING) landscape.play();
                 if (data === YT.PlayerState.PAUSED) landscape.pause();
@@ -182,6 +191,8 @@ function loadYouTubeAPI() {
       stage.getBoundingClientRect(); // Commit the black frame before enabling the video fade.
       player.focus({preventScroll:true});
       try {
+        player.muted = false;
+        if (player.volume === 0) player.volume = 1;
         await player.play();
         if (token === sequence && player.readyState >= 2) revealFilm();
       } catch {
