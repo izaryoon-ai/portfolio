@@ -1,0 +1,7 @@
+.direction-film { min-width: 0; margin: 0; }
+.direction-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; gap: clamp(20px, 3vw, 48px); margin-block: 2rem; }
+.direction-split > .direction-note { border-inline-end: 1px solid currentColor; padding-inline-end: clamp(20px, 3vw, 48px); }
+@media (max-width: 800px) {
+ .direction-split { grid-template-columns: minmax(0,1fr); }
+ .direction-split > .direction-note { border-inline-end: 0; border-bottom: 1px solid currentColor; padding: 0 0 1rem; }
+}
