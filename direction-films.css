@@ -5,3 +5,10 @@
  .direction-split { grid-template-columns: minmax(0,1fr); }
  .direction-split > .direction-note { border-inline-end: 0; border-bottom: 1px solid currentColor; padding: 0 0 1rem; }
 }
+
+.direction-film:has(#Cara_sound-player) .resume-film-stage,
+.direction-film:has(#Cara_sound-player) .resume-film-cover.unified-film-cover {aspect-ratio:1600/948;}
+.direction-film .resume-film-cover.unified-film-cover {padding:0;border:0;overflow:hidden;}
+.direction-film .resume-film-cover.unified-film-cover > img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.direction-film .resume-film-stage > #Cara_sound-player {inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);}
+
